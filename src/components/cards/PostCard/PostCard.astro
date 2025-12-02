@@ -1,0 +1,70 @@
+---
+import "./PostCard.css";
+
+interface Props {
+    title: string;
+    pubDate: Date;
+    image?: string;
+    authorName?: string;
+    authorAvatar?: string;
+    tags?: string[];
+    slug: string;
+    excerpt?: string;
+}
+
+const { title, pubDate, image, authorName, authorAvatar, tags, slug, excerpt } =
+    Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<a href={`/blog/${slug}`} class="post-card">
+    {
+        image && (
+            <div class="post-card-image-container">
+                <img src={image} alt={title} class="post-card-image" />
+            </div>
+        )
+    }
+    <div class="post-card-content">
+        <div class="post-card-meta">
+            <time datetime={pubDate.toISOString()} class="post-card-date"
+                >{formattedDate}</time
+            >
+        </div>
+        <h3 class="post-card-title">
+            {title}
+        </h3>
+        {excerpt && <p class="post-card-excerpt">{excerpt}</p>}
+
+        <div class="post-card-footer">
+            {
+                authorName && (
+                    <div class="post-card-author">
+                        {authorAvatar && (
+                            <img
+                                src={authorAvatar}
+                                alt={authorName}
+                                class="post-card-author-avatar"
+                            />
+                        )}
+                        <span class="post-card-author-name">{authorName}</span>
+                    </div>
+                )
+            }
+            {
+                tags && tags.length > 0 && (
+                    <div class="post-card-tags">
+                        {tags.slice(0, 2).map((tag) => (
+                            <span class="post-card-tag">#{tag}</span>
+                        ))}
+                    </div>
+                )
+            }
+        </div>
+    </div>
+</a>
