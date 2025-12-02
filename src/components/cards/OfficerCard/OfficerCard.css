@@ -1,0 +1,89 @@
+.officer-card {
+    background-color: var(--color-dark-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.officer-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.2);
+}
+
+.officer-avatar-container {
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.officer-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.officer-card:hover .officer-avatar {
+    border-color: var(--color-primary);
+}
+
+.officer-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-mono);
+}
+
+.officer-role {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.officer-bio {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.officer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.social-link {
+    color: #6b7280;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.social-link:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.social-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+}
