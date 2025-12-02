@@ -1,0 +1,66 @@
+fragment PostsParts on Posts {
+  __typename
+  title
+  pubDate
+  author {
+    ... on Officers {
+      __typename
+      name
+      role
+      avatar
+      bio
+      socials {
+        __typename
+        github
+        linkedin
+      }
+    }
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+  }
+  image
+  tags
+  body
+}
+
+fragment EventsParts on Events {
+  __typename
+  title
+  date
+  location
+  registrationLink
+  status
+  flyer
+  body
+}
+
+fragment OfficersParts on Officers {
+  __typename
+  name
+  role
+  avatar
+  bio
+  socials {
+    __typename
+    github
+    linkedin
+  }
+}
+
+fragment ResourcesParts on Resources {
+  __typename
+  title
+  description
+  fileUrl
+  category
+}
