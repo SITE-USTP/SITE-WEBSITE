@@ -7,25 +7,6 @@ const posts = await getCollection("posts");
 const sortedPosts = posts.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-// Fetch authors for posts
-const postsWithAuthors = await Promise.all(
-    sortedPosts.map(async (post) => {
-        let author = null;
-        if (post.data.author) {
-            const authorSlug = post.data.author
-                .split("/")
-                .pop()
-                ?.replace(".md", "");
-            if (authorSlug) {
-                author = await getEntry("officers", authorSlug);
-            }
-        }
-        return { ...post, author };
-    }),
-);
-
-import { getEntry } from "astro:content";
 ---
 
 <section class="blog-list-section">
@@ -45,20 +26,7 @@ import { getEntry } from "astro:content";
         </div>
 
         <div class="blog-list-grid">
-            {
-                postsWithAuthors.map((post) => (
-                    <PostCard
-                        title={post.data.title}
-                        pubDate={post.data.pubDate}
-                        image={post.data.image}
-                        authorName={post.author?.data.name}
-                        authorAvatar={post.author?.data.avatar}
-                        tags={post.data.tags}
-                        slug={post.slug}
-                        excerpt={post.body.substring(0, 150) + "..."}
-                    />
-                ))
-            }
+            {sortedPosts.map((post) => <PostCard post={post} />)}
         </div>
     </div>
 </section>
