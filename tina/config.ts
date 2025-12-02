@@ -98,11 +98,6 @@ export default defineConfig({
                     },
                     {
                         type: "string",
-                        name: "registrationLink",
-                        label: "Registration Link",
-                    },
-                    {
-                        type: "string",
                         name: "status",
                         label: "Status",
                         options: ["Upcoming", "Completed", "Cancelled"],
