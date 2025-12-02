@@ -1,0 +1,68 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+import "./BlogPost.css";
+
+interface Props {
+    post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+let author = null;
+if (post.data.author) {
+    const authorSlug = post.data.author.split("/").pop()?.replace(".md", "");
+    if (authorSlug) {
+        author = await getEntry("officers", authorSlug);
+    }
+}
+
+const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<article class="blog-post-article">
+    <div class="container mx-auto px-4">
+        <header class="blog-post-header">
+            <div class="blog-post-meta">
+                <time datetime={post.data.pubDate.toISOString()}
+                    >{formattedDate}</time
+                >
+                <span>•</span>
+                {author && <span>{author.data.name}</span>}
+            </div>
+            <h1 class="blog-post-title">{post.data.title}</h1>
+            {
+                post.data.tags && (
+                    <div class="flex justify-center gap-2 mt-4">
+                        {post.data.tags.map((tag) => (
+                            <span class="text-xs font-mono px-2 py-1 rounded-full bg-white/10 text-gray-300">
+                                #{tag}
+                            </span>
+                        ))}
+                    </div>
+                )
+            }
+        </header>
+
+        {
+            post.data.image && (
+                <div class="blog-post-image-container">
+                    <img
+                        src={post.data.image}
+                        alt={post.data.title}
+                        class="blog-post-image"
+                    />
+                </div>
+            )
+        }
+
+        <div class="blog-post-content">
+            <Content />
+        </div>
+    </div>
+</article>
