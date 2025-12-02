@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import EventCard from "../../cards/EventCard/EventCard.astro";
+import "./EventList.css";
+
+const events = await getCollection("events");
+
+// Sort events: Upcoming first, then by date ascending. Completed/Cancelled last.
+const sortedEvents = events.sort((a, b) => {
+    const statusOrder = { Upcoming: 0, Completed: 1, Cancelled: 2 };
+    const statusDiff = statusOrder[a.data.status] - statusOrder[b.data.status];
+
+    if (statusDiff !== 0) return statusDiff;
+
+    // If both are upcoming, show nearest date first
+    if (a.data.status === "Upcoming") {
+        return a.data.date.valueOf() - b.data.date.valueOf();
+    }
+
+    // If both are past, show most recent first
+    return b.data.date.valueOf() - a.data.date.valueOf();
+});
+---
+
+<section class="event-list-section">
+    <div class="container mx-auto px-4">
+        <div class="event-list-header">
+            <h1 class="event-list-title">
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]"
+                >
+                    Events Calendar
+                </span>
+            </h1>
+            <p class="event-list-description">
+                Join us for workshops, hackathons, and community meetups. Stay
+                updated with our latest activities.
+            </p>
+        </div>
+
+        <div class="event-list-grid">
+            {
+                sortedEvents.length > 0 ? (
+                    sortedEvents.map((event) => <EventCard event={event} />)
+                ) : (
+                    <div class="col-span-full text-center py-12 text-gray-500">
+                        <p>
+                            No events scheduled at the moment. Check back soon!
+                        </p>
+                    </div>
+                )
+            }
+        </div>
+    </div>
+</section>
