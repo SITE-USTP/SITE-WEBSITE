@@ -2,10 +2,16 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/sections/Hero/Hero.astro";
 import PostCard from "../components/cards/PostCard/PostCard.astro";
+import EventCard from "../components/cards/EventCard/EventCard.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("posts"))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+
+const upcomingEvents = (await getCollection("events"))
+	.filter((event) => event.data.status === "Upcoming")
+	.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
 	.slice(0, 3);
 ---
 
@@ -53,24 +59,19 @@ const posts = (await getCollection("posts"))
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{/* Placeholder for EventCards */}
-				<div class="card border-l-4 border-l-[var(--color-accent)]">
-					<div
-						class="text-sm text-[var(--color-accent)] font-mono mb-2"
-					>
-						UPCOMING
-					</div>
-					<h3 class="text-xl font-bold mb-2">
-						Tech Talk: Intro to Astro
-					</h3>
-					<p class="text-gray-400 mb-4">
-						Learn how to build fast static sites with Astro.
-					</p>
-					<div class="flex items-center text-sm text-gray-500">
-						<span class="mr-4">📅 Oct 15, 2023</span>
-						<span>📍 USTP Auditorium</span>
-					</div>
-				</div>
+				{
+					upcomingEvents.length > 0 ? (
+						upcomingEvents.map((event) => (
+							<EventCard event={event} />
+						))
+					) : (
+						<div class="col-span-full text-center py-8 text-gray-500 border border-dashed border-gray-700 rounded-lg">
+							<p>
+								No upcoming events scheduled. Check back soon!
+							</p>
+						</div>
+					)
+				}
 			</div>
 		</div>
 	</section>
