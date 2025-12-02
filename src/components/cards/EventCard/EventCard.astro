@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { event } = Astro.props;
-const { title, date, location, status, flyer, registrationLink } = event.data;
+const { title, date, location, status, flyer } = event.data;
 
 const formattedDate = date.toLocaleDateString("en-US", {
     weekday: "short",
@@ -50,20 +50,13 @@ const statusClass = `status-${status.toLowerCase()}`;
 
         <div class="event-card-footer">
             {
-                registrationLink && status === "Upcoming" ? (
-                    <a
-                        href={registrationLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-primary text-sm inline-block w-full text-center"
-                    >
-                        Register Now
-                    </a>
+                status === "Upcoming" ? (
+                    <span class="text-gray-400 text-sm">
+                        Open to all students
+                    </span>
                 ) : (
                     <span class="text-gray-500 text-sm">
-                        {status === "Completed"
-                            ? "Event Ended"
-                            : "Registration Closed"}
+                        {status === "Completed" ? "Event Ended" : "Cancelled"}
                     </span>
                 )
             }
