@@ -1,3 +1,4 @@
+---
 title: "Sample Event"
 date: 2025-12-31T00:00:00.000Z
 location: "Online via Zoom"
