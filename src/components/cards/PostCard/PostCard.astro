@@ -1,19 +1,29 @@
 ---
+import { type CollectionEntry, getEntry } from "astro:content";
 import "./PostCard.css";
 
 interface Props {
-    title: string;
-    pubDate: Date;
-    image?: string;
-    authorName?: string;
-    authorAvatar?: string;
-    tags?: string[];
-    slug: string;
-    excerpt?: string;
+    post: CollectionEntry<"posts">;
 }
 
-const { title, pubDate, image, authorName, authorAvatar, tags, slug, excerpt } =
-    Astro.props;
+const { post } = Astro.props;
+const { title, pubDate, image, tags } = post.data;
+const slug = post.slug;
+
+let authorName = "";
+let authorAvatar = "";
+
+if (post.data.author) {
+    // Handle TinaCMS reference path (e.g., "src/content/officers/john-doe.md")
+    const authorSlug = post.data.author.split("/").pop()?.replace(".md", "");
+    if (authorSlug) {
+        const authorEntry = await getEntry("officers", authorSlug);
+        if (authorEntry) {
+            authorName = authorEntry.data.name;
+            authorAvatar = authorEntry.data.avatar || "";
+        }
+    }
+}
 
 const formattedDate = pubDate.toLocaleDateString("en-US", {
     year: "numeric",
@@ -39,7 +49,9 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
         <h3 class="post-card-title">
             {title}
         </h3>
-        {excerpt && <p class="post-card-excerpt">{excerpt}</p>}
+        <p class="post-card-excerpt">
+            {post.body.substring(0, 150)}...
+        </p>
 
         <div class="post-card-footer">
             {
