@@ -1,0 +1,118 @@
+.footer {
+    background-color: var(--color-dark-surface);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.footer-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+@media (min-width: 640px) {
+    .footer-container {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .footer-container {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-container {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .footer-container {
+        max-width: 1280px;
+    }
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row;
+    }
+}
+
+.footer-info {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .footer-info {
+        margin-bottom: 0;
+        text-align: left;
+    }
+}
+
+.footer-title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--color-primary);
+}
+
+.footer-subtitle {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.footer-socials {
+    display: flex;
+    column-gap: 1.5rem;
+}
+
+.footer-social-link {
+    color: #9ca3af;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+.footer-social-link:hover {
+    color: var(--color-primary);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.footer-copyright {
+    margin-top: 2rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
