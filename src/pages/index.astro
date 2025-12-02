@@ -1,12 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/sections/Hero/Hero.astro";
+import PostCard from "../components/cards/PostCard/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("posts"))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <Layout title="Home">
 	<Hero />
 
-	<section class="py-16 bg-[var(--color-dark-surface)]">
+	<section class="py-16">
 		<div class="container mx-auto px-4">
 			<div class="flex justify-between items-end mb-12">
 				<div>
@@ -25,39 +31,7 @@ import Hero from "../components/sections/Hero/Hero.astro";
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				{
-					/* Placeholder for PostCards - will be populated with content collection data later */
-				}
-				<div class="card">
-					<div class="h-48 bg-gray-800 rounded mb-4 animate-pulse">
-					</div>
-					<div
-						class="h-6 bg-gray-800 rounded w-3/4 mb-2 animate-pulse"
-					>
-					</div>
-					<div class="h-4 bg-gray-800 rounded w-1/2 animate-pulse">
-					</div>
-				</div>
-				<div class="card">
-					<div class="h-48 bg-gray-800 rounded mb-4 animate-pulse">
-					</div>
-					<div
-						class="h-6 bg-gray-800 rounded w-3/4 mb-2 animate-pulse"
-					>
-					</div>
-					<div class="h-4 bg-gray-800 rounded w-1/2 animate-pulse">
-					</div>
-				</div>
-				<div class="card">
-					<div class="h-48 bg-gray-800 rounded mb-4 animate-pulse">
-					</div>
-					<div
-						class="h-6 bg-gray-800 rounded w-3/4 mb-2 animate-pulse"
-					>
-					</div>
-					<div class="h-4 bg-gray-800 rounded w-1/2 animate-pulse">
-					</div>
-				</div>
+				{posts.map((post) => <PostCard post={post} />)}
 			</div>
 		</div>
 	</section>
