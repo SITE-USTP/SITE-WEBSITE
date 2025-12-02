@@ -1,7 +1,8 @@
----
 title: "Sample Event"
-date: 2023-12-31T00:00:00.000Z
-location: "Online"
+date: 2025-12-31T00:00:00.000Z
+location: "Online via Zoom"
 status: "Upcoming"
+flyer: /uploads/SITE-2ndPlace.jpg
+registrationLink: "https://example.com/register"
 ---
-Sample event description.
+Join us for this amazing sample event! We will discuss the future of technology and innovation.
