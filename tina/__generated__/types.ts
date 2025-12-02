@@ -293,7 +293,6 @@ export type Events = Node & Document & {
   title: Scalars['String']['output'];
   date: Scalars['String']['output'];
   location: Scalars['String']['output'];
-  registrationLink?: Maybe<Scalars['String']['output']>;
   status: Scalars['String']['output'];
   flyer?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
@@ -306,7 +305,6 @@ export type EventsFilter = {
   title?: InputMaybe<StringFilter>;
   date?: InputMaybe<DatetimeFilter>;
   location?: InputMaybe<StringFilter>;
-  registrationLink?: InputMaybe<StringFilter>;
   status?: InputMaybe<StringFilter>;
   flyer?: InputMaybe<ImageFilter>;
   body?: InputMaybe<RichTextFilter>;
@@ -526,7 +524,6 @@ export type EventsMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
-  registrationLink?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
   flyer?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
@@ -554,7 +551,7 @@ export type ResourcesMutation = {
 
 export type PostsPartsFragment = { __typename: 'Posts', title: string, pubDate: string, image?: string | null, tags?: Array<string | null> | null, body?: any | null, author: { __typename: 'Officers', name: string, role: string, avatar?: string | null, bio?: string | null, id: string, socials?: { __typename: 'OfficersSocials', github?: string | null, linkedin?: string | null } | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type EventsPartsFragment = { __typename: 'Events', title: string, date: string, location: string, registrationLink?: string | null, status: string, flyer?: string | null, body?: any | null };
+export type EventsPartsFragment = { __typename: 'Events', title: string, date: string, location: string, status: string, flyer?: string | null, body?: any | null };
 
 export type OfficersPartsFragment = { __typename: 'Officers', name: string, role: string, avatar?: string | null, bio?: string | null, socials?: { __typename: 'OfficersSocials', github?: string | null, linkedin?: string | null } | null };
 
@@ -584,7 +581,7 @@ export type EventsQueryVariables = Exact<{
 }>;
 
 
-export type EventsQuery = { __typename?: 'Query', events: { __typename: 'Events', id: string, title: string, date: string, location: string, registrationLink?: string | null, status: string, flyer?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type EventsQuery = { __typename?: 'Query', events: { __typename: 'Events', id: string, title: string, date: string, location: string, status: string, flyer?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type EventsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -596,7 +593,7 @@ export type EventsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type EventsConnectionQuery = { __typename?: 'Query', eventsConnection: { __typename?: 'EventsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'EventsConnectionEdges', cursor: string, node?: { __typename: 'Events', id: string, title: string, date: string, location: string, registrationLink?: string | null, status: string, flyer?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type EventsConnectionQuery = { __typename?: 'Query', eventsConnection: { __typename?: 'EventsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'EventsConnectionEdges', cursor: string, node?: { __typename: 'Events', id: string, title: string, date: string, location: string, status: string, flyer?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type OfficersQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -678,7 +675,6 @@ export const EventsPartsFragmentDoc = gql`
   title
   date
   location
-  registrationLink
   status
   flyer
   body

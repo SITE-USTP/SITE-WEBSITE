@@ -166,7 +166,6 @@ type Events implements Node & Document {
   title: String!
   date: String!
   location: String!
-  registrationLink: String
   status: String!
   flyer: String
   body: JSON
@@ -179,7 +178,6 @@ input EventsFilter {
   title: StringFilter
   date: DatetimeFilter
   location: StringFilter
-  registrationLink: StringFilter
   status: StringFilter
   flyer: ImageFilter
   body: RichTextFilter
@@ -308,7 +306,6 @@ input EventsMutation {
   title: String
   date: String
   location: String
-  registrationLink: String
   status: String
   flyer: String
   body: JSON
