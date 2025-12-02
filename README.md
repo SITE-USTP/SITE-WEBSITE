@@ -38,6 +38,7 @@ You need a program called **Node.js** to run this website on your computer.
    ```bash
    npm run tina
    ```
+   > **IMPORTANT:** Do **NOT** run `npm run dev`. The `npm run tina` command starts both the website and the admin panel for you.
 
 ### Step 4: Edit Content
 Once the command above is running, open your web browser (Chrome, Edge, etc.):
