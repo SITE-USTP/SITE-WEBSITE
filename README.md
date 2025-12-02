@@ -1,68 +1,80 @@
 # SITE Website
 
 The official website for **SITE (Society of Information Technology Enthusiasts)**.
-Built with **Astro**, **React**, **Tailwind CSS**, and **TinaCMS**.
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+## 🌟 Quick Start Guide (For Non-Programmers)
 
-- Node.js (v18 or higher)
-- npm
+If you are an officer or content editor who just wants to update the website, follow these simple steps.
 
-### Installation
+### Step 1: Install the Required Software
+You need a program called **Node.js** to run this website on your computer.
+1. Go to [nodejs.org](https://nodejs.org/).
+2. Download the **LTS (Long Term Support)** version.
+3. Install it just like any other program (keep clicking "Next").
 
-1. Clone the repository:
+### Step 2: Download the Website Code
+1. Open your computer's terminal:
+   - **Windows**: Search for "PowerShell" or "Command Prompt".
+   - **Mac**: Search for "Terminal".
+2. Copy and paste this command to download the code:
    ```bash
    git clone https://github.com/SITE-USTP/SITE-WEBSITE.git
+   ```
+3. Go into the website folder:
+   ```bash
    cd SITE-WEBSITE
    ```
 
-2. Install dependencies:
+### Step 3: Turn on the Website
+1. First time only: Install the project tools by running this command:
    ```bash
    npm install
    ```
-   > **Note:** If you encounter errors with native modules, try: `npm install --force`
+   *(If you see red errors, try `npm install --force`)*
 
-### 💻 Development
+2. **Every time you want to edit the site**, run this command:
+   ```bash
+   npm run tina
+   ```
 
-To start the development server with **TinaCMS** enabled:
+### Step 4: Edit Content
+Once the command above is running, open your web browser (Chrome, Edge, etc.):
 
-```bash
-npm run tina
-```
+- **To view the website:** Go to [http://localhost:4321](http://localhost:4321)
+- **To edit content (Admin Panel):** Go to [http://localhost:4321/admin](http://localhost:4321/admin)
 
-- **Website**: [http://localhost:4321](http://localhost:4321)
-- **CMS Admin**: [http://localhost:4321/admin](http://localhost:4321/admin)
+> **Note:** Keep the terminal window open while you are editing. To stop the website, click on the terminal and press `Ctrl + C`.
 
-### 🏗️ Building for Production
+---
 
-To build the static site:
+## 💻 For Developers
 
-```bash
-npm run build
-```
-
-The output will be in the `dist/` directory.
-
-## 🛠️ Tech Stack
-
+### Tech Stack
 - **Framework**: [Astro](https://astro.build/)
 - **UI Library**: [React](https://react.dev/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **CMS**: [TinaCMS](https://tina.io/)
 
-## 📂 Project Structure
+### Commands
+| Command | Description |
+| :--- | :--- |
+| `npm install` | Installs dependencies. |
+| `npm run tina` | Starts the dev server with TinaCMS (Recommended). |
+| `npm run dev` | Starts Astro dev server only (No CMS). |
+| `npm run build` | Builds the static site for production (`dist/`). |
 
+### Project Structure
 ```text
 /
-├── public/             # Static assets
+├── public/             # Static assets (images, icons)
 ├── src/
-│   ├── components/     # Reusable UI components (React & Astro)
-│   ├── content/        # Content collections (config)
+│   ├── components/     # UI components (Navbar, Cards, etc.)
+│   ├── content/        # Content definitions
 │   ├── layouts/        # Page layouts
-│   ├── pages/          # Application routes
-│   └── styles/         # Global styles
-├── tina/               # TinaCMS configuration & schema
+│   ├── pages/          # Website pages
+│   └── styles/         # CSS files
+├── tina/               # CMS configuration
 └── package.json
 ```
