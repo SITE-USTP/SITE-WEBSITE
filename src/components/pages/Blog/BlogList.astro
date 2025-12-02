@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../cards/PostCard/PostCard.astro";
+import "./BlogList.css";
+
+const posts = await getCollection("posts");
+const sortedPosts = posts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Fetch authors for posts
+const postsWithAuthors = await Promise.all(
+    sortedPosts.map(async (post) => {
+        let author = null;
+        if (post.data.author) {
+            const authorSlug = post.data.author
+                .split("/")
+                .pop()
+                ?.replace(".md", "");
+            if (authorSlug) {
+                author = await getEntry("officers", authorSlug);
+            }
+        }
+        return { ...post, author };
+    }),
+);
+
+import { getEntry } from "astro:content";
+---
+
+<section class="blog-list-section">
+    <div class="container mx-auto px-4">
+        <div class="blog-list-header">
+            <h1 class="blog-list-title">
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)]"
+                >
+                    Latest Updates
+                </span>
+            </h1>
+            <p class="blog-list-description">
+                Insights, tutorials, and news from the Society of Information
+                Technology Enthusiasts.
+            </p>
+        </div>
+
+        <div class="blog-list-grid">
+            {
+                postsWithAuthors.map((post) => (
+                    <PostCard
+                        title={post.data.title}
+                        pubDate={post.data.pubDate}
+                        image={post.data.image}
+                        authorName={post.author?.data.name}
+                        authorAvatar={post.author?.data.avatar}
+                        tags={post.data.tags}
+                        slug={post.slug}
+                        excerpt={post.body.substring(0, 150) + "..."}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
