@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  location: string;
+  status: 'Upcoming' | 'Completed' | 'Cancelled';
+  slug: string;
+}
+
+const { title, date, location, status, slug } = Astro.props;
+
+const statusColors = {
+  Upcoming: 'text-[var(--color-primary)] border-[var(--color-primary)]',
+  Completed: 'text-gray-500 border-gray-500',
+  Cancelled: 'text-red-500 border-red-500',
+};
+---
+
+<div class={`card border-l-4 ${statusColors[status] || 'border-gray-500'}`}>
+  <div class="flex justify-between items-start mb-2">
+    <span class={`text-xs font-mono px-2 py-1 rounded border ${statusColors[status] || 'border-gray-500'} bg-opacity-10`}>
+      {status.toUpperCase()}
+    </span>
+    <span class="text-gray-400 text-sm font-mono">
+      {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+    </span>
+  </div>
+  
+  <h3 class="text-xl font-bold mb-2">{title}</h3>
+  
+  <div class="space-y-1 text-sm text-gray-400 mb-4">
+    <div class="flex items-center">
+      <span class="mr-2">🕒</span>
+      {date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+    </div>
+    <div class="flex items-center">
+      <span class="mr-2">📍</span>
+      {location}
+    </div>
+  </div>
+  
+  <a href={`/events/${slug}`} class="btn-primary w-full text-center block text-sm py-2">
+    View Details
+  </a>
+</div>
